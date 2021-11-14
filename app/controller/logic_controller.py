@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from model.class_model import Post
+from app.model.class_model import Post
 
 
 def deco_register():
@@ -7,9 +7,9 @@ def deco_register():
     new_post = Post(**data)
 
     new_post.register()
-    new_post.created_at()
+    new_post.creator()
 
-    return new_post
+    return new_post.__dict__
 
 
 def deco_show():
@@ -22,8 +22,10 @@ def deco_show_by_id(id):
     return jsonify(specific_post)
 
 
-def deco_update():
-    return "em fase"
+# def deco_update(id):
+#     to_update = 
+#     to_update.updator()
+#     return jsonify(to_update)
 
 
 def deco_delete(id):

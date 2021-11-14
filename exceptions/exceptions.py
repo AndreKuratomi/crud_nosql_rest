@@ -1,6 +1,6 @@
 class NotFoundError(Exception):
     def __init__(self):
-        self.message = {"message": "Não encontrado!"}
+        self.message = {"message": "Não encontrado ou inexistente!"}
         super.__init__(self.message)
 
 
