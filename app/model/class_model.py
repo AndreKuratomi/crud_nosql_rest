@@ -50,7 +50,7 @@ class Post:
                 raise IncompleteRegisterError
             elif type(self.title) != str or type(self.author) != str or type(self.content) != str:
                 raise WrongTypesError
-                
+
             return new_post, 201
 
         except IncompleteRegisterError as err:
@@ -65,8 +65,8 @@ class Post:
             to_update = db.posts.update_one({"id": id})
             return to_update, 204
 
-        # except:
-        #     raise 
+        except:
+            ...
 
     @staticmethod
     def delete(id):
