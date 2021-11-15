@@ -4,12 +4,12 @@ from app.controller.logic_controller import deco_delete, deco_register, deco_sho
 
 def init_app(app: Flask):
 
-    app.post("/post")(deco_register)
+    app.post("/posts")(deco_register)
 
-    app.get("/post")(deco_show)
+    app.get("/posts")(deco_show)
 
-    app.get("post/<int:id>")(deco_show_by_id)
+    app.get("/posts/<id>")(deco_show_by_id)
 
-    app.patch("/update")(deco_update)
+    app.patch("/posts/<id>")(deco_update)
 
-    app.delete("/delete/<int:id>")(deco_delete)
+    app.delete("/posts/<id>")(deco_delete)

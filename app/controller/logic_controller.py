@@ -22,10 +22,10 @@ def deco_show_by_id(id):
     return jsonify(specific_post)
 
 
-# def deco_update(id):
-#     to_update = 
-#     to_update.updator()
-#     return jsonify(to_update)
+def deco_update(id):
+    to_update = Post.update(id)
+    to_update.updator()
+    return jsonify(to_update)
 
 
 def deco_delete(id):
