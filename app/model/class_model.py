@@ -1,7 +1,7 @@
 import pymongo
 from flask import jsonify
 from datetime import datetime
-from exceptions.exceptions import NotFoundError
+from exceptions.exceptions import IncompleteSendError, NotFoundError
 from ipdb import set_trace
 
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -22,7 +22,6 @@ class Post:
         arr = list(db.posts.find())
         if arr:
             return arr[-1]['id'] + 1
-            
         else:
             return 1
 
@@ -56,8 +55,8 @@ class Post:
                     del found['_id']
 
                     return jsonify(found), 200
-            else:
-                raise NotFoundError
+                else:
+                    raise NotFoundError
 
         except NotFoundError as e:
             return e.message, 404
@@ -66,36 +65,38 @@ class Post:
         db.posts.insert_one(self.__dict__)
 
     @staticmethod
-    def update(id):
+    def update(id, data):
         try:
-            arr = db.posts.find()
-            for find in arr:
-                if find['id'] == int(id):
-                    del find['_id']
-                    # set_trace()
-                    db.posts.update_one({'id': int(id)}, {'$set': {'author': 'Batista Jonash'}})
-                    return find, 200
-                else:
-                    raise NotFoundError
+            to_update1 = db.posts.find_one({'id': int(id)})
+
+            if to_update1:
+                del to_update1['_id']
+                db.posts.update_one({'id': int(id)}, {'$set': data})
+
+                to_update2 = db.posts.find_one({'id': int(id)})
+                del to_update2['_id']
+
+                return jsonify(to_update2), 200
+            else:
+                raise NotFoundError
 
         except NotFoundError as e:
             return e.message, 404
-            ...
+
+        except IncompleteSendError as e:
+            return e.message, 400
 
     @staticmethod
     def delete(id):
         try:
             surv_arr = []
+            the_one = db.posts.find_one({'id': int(id)})
 
-            arr = db.posts.find()
-            for to_delete in arr:
-                if to_delete['id'] == int(id):
-                    del to_delete['_id']
-                    surv_arr.append(to_delete)
-                    db.posts.find_one_and_delete(to_delete)
-
-                    return jsonify(surv_arr), 200
-                    # dúvida no porquê de estar retornando uma lista mesmo com o jsonify
+            if the_one:
+                del the_one['_id']
+                surv_arr.append(the_one)
+                db.posts.find_one_and_delete(the_one)
+                return jsonify(surv_arr), 200
             else:
                 raise NotFoundError
 

@@ -7,7 +7,7 @@ class NotFoundError(Exception):
         super().__init__(self.message)
 
 
-class IncompleteRegisterError(Exception):
+class IncompleteSendError(Exception):
     def __init__(self):
         self.message = {"message": "JSON incompleto!"}
         super().__init__(self.message)

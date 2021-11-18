@@ -1,11 +1,12 @@
-from flask import jsonify, request
+from flask import request
 from ipdb import set_trace
 from app.model.class_model import Post
-from exceptions.exceptions import IncompleteRegisterError, NotFoundError, WrongTypesError
+from exceptions.exceptions import IncompleteSendError, NotFoundError
+
+valid_keys = {"title", "author", "content", "tags"}
 
 
 def deco_register():
-    valid_keys = {"title", "author", "content", "tags"}
     try:
         data = request.json
         data_keys = data.keys()
@@ -13,11 +14,7 @@ def deco_register():
         comparison = valid_keys.difference(set_data)
 
         if comparison != set():
-            raise IncompleteRegisterError
-
-        # elif type(data['title']) != str or type(data['author']) != str or type(data['tags']) != list or type(data['content']) != str:
-        #     raise WrongTypesError(data['title'], data['author'], data['tags'], data['content'])
-
+            raise IncompleteSendError
         else:
             new_object = Post(**data)
             new_object.register()
@@ -26,11 +23,8 @@ def deco_register():
 
             return new_post, 201
 
-    except IncompleteRegisterError as err:
-        return err.message
-
-    except WrongTypesError as err:
-        return err.message
+    except IncompleteSendError as err:
+        return err.message, 400
 
 
 def deco_show():
@@ -44,10 +38,16 @@ def deco_show_by_id(id):
 
 
 def deco_update(id):
-    to_update = Post.update(id)
-    # set_trace()
-    # to_update.updator()
-    return to_update
+    try:
+        data = request.json
+        to_update = Post.update(id, data)
+
+        if not to_update:
+            raise NotFoundError
+        return to_update
+
+    except NotFoundError as e:
+        return e.message, 404
 
 
 def deco_delete(id):
