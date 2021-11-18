@@ -45,8 +45,9 @@ def deco_show_by_id(id):
 
 def deco_update(id):
     to_update = Post.update(id)
-    to_update.updator()
-    return jsonify(to_update)
+    # set_trace()
+    # to_update.updator()
+    return to_update
 
 
 def deco_delete(id):

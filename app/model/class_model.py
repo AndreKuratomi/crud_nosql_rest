@@ -68,10 +68,18 @@ class Post:
     @staticmethod
     def update(id):
         try:
-            to_update = db.posts.update_one({"id": id})
-            return to_update, 204
+            arr = db.posts.find()
+            for find in arr:
+                if find['id'] == int(id):
+                    del find['_id']
+                    # set_trace()
+                    db.posts.update_one({'id': int(id)}, {'$set': {'author': 'Batista Jonash'}})
+                    return find, 200
+                else:
+                    raise NotFoundError
 
-        except:
+        except NotFoundError as e:
+            return e.message, 404
             ...
 
     @staticmethod
