@@ -25,9 +25,6 @@ class Post:
         else:
             return 1
 
-    def updator(self):
-        self.updated_at = {"Updated at": datetime.today().strftime("%d/%m/%Y %H:%M:%S %p")}
-
     @staticmethod
     def show_all():
         try:
