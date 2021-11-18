@@ -55,8 +55,6 @@ class Post:
                     del found['_id']
 
                     return jsonify(found), 200
-                else:
-                    raise NotFoundError
 
         except NotFoundError as e:
             return e.message, 404
