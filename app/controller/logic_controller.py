@@ -1,9 +1,11 @@
+from datetime import datetime
 from flask import request
 from ipdb import set_trace
 from app.model.class_model import Post
 from exceptions.exceptions import IncompleteSendError, NotFoundError
 
 valid_keys = {"title", "author", "content", "tags"}
+updating_valid_keys = {'author', 'id', 'title', 'content', 'tags', 'created_at', 'updated_at'}
 
 
 def deco_register():
@@ -15,6 +17,7 @@ def deco_register():
 
         if comparison != set():
             raise IncompleteSendError
+
         else:
             new_object = Post(**data)
             new_object.register()
@@ -44,10 +47,23 @@ def deco_update(id):
 
         if not to_update:
             raise NotFoundError
-        return to_update
+
+        new_dict = to_update[0]
+        new_dict['updated_at'] = datetime.today().strftime("%d/%m/%Y %H:%M:%S %p")
+
+        set_new_dict_keys = set(new_dict.keys())
+        comparison = set_new_dict_keys.difference(updating_valid_keys)
+
+        if comparison != set():
+            raise IncompleteSendError
+
+        return new_dict, 201
 
     except NotFoundError as e:
         return e.message, 404
+
+    except IncompleteSendError as err:
+        return err.message, 400
 
 
 def deco_delete(id):

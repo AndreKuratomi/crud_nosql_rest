@@ -9,7 +9,7 @@ class NotFoundError(Exception):
 
 class IncompleteSendError(Exception):
     def __init__(self):
-        self.message = {"message": "JSON incompleto!"}
+        self.message = {"message": "JSON incompleto! Verifique se sua requisição está completa e se suas keys escritas corretamente."}
         super().__init__(self.message)
 
 

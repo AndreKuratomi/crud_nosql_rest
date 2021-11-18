@@ -55,6 +55,8 @@ class Post:
                     del found['_id']
 
                     return jsonify(found), 200
+                else:
+                    raise NotFoundError
 
         except NotFoundError as e:
             return e.message, 404
@@ -64,25 +66,16 @@ class Post:
 
     @staticmethod
     def update(id, data):
-        try:
-            to_update1 = db.posts.find_one({'id': int(id)})
+        to_update1 = db.posts.find_one({'id': int(id)})
 
-            if to_update1:
-                del to_update1['_id']
-                db.posts.update_one({'id': int(id)}, {'$set': data})
+        if to_update1:
+            del to_update1['_id']
+            db.posts.update_one({'id': int(id)}, {'$set': data})
 
-                to_update2 = db.posts.find_one({'id': int(id)})
-                del to_update2['_id']
+            to_update2 = db.posts.find_one({'id': int(id)})
+            del to_update2['_id']
 
-                return jsonify(to_update2), 200
-            else:
-                raise NotFoundError
-
-        except NotFoundError as e:
-            return e.message, 404
-
-        except IncompleteSendError as e:
-            return e.message, 400
+            return to_update2, 200
 
     @staticmethod
     def delete(id):
@@ -94,7 +87,8 @@ class Post:
                 del the_one['_id']
                 surv_arr.append(the_one)
                 db.posts.find_one_and_delete(the_one)
-                return jsonify(surv_arr), 200
+                return jsonify(surv_arr)
+
             else:
                 raise NotFoundError
 
