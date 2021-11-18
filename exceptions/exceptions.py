@@ -1,13 +1,16 @@
+from ipdb import set_trace
+
+
 class NotFoundError(Exception):
     def __init__(self):
         self.message = {"message": "Não encontrado ou inexistente!"}
-        super.__init__(self.message)
+        super().__init__(self.message)
 
 
 class IncompleteRegisterError(Exception):
     def __init__(self):
         self.message = {"message": "JSON incompleto!"}
-        super.__init__(self.message)
+        super().__init__(self.message)
 
 
 class WrongTypesError(Exception):
@@ -29,12 +32,13 @@ class WrongTypesError(Exception):
                 {
                     "author": f"{self.types[type(author)]}"
                 },
-                # {
-                #     "tags": f"{self.types[type(tags)]}"
-                # },
+                {
+                    "tags": f"{self.types[type(tags)]}"
+                },
                 {
                     "content": f"{self.types[type(content)]}"
                 }
             ]
         }
+        set_trace()
         super().__init__(self.message)
