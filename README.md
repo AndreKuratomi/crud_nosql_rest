@@ -69,7 +69,7 @@ ative o seu ambiente virtual com o comando:
 source/venv/bin/activate
 ```
 
-<h5>3. recursivamente as dependências do projeto com o comando:</h5>
+<h5>3. Instalar recursivamente as dependências do projeto com o comando:</h5>
 
 ```
 pip install -r requirements.txt
