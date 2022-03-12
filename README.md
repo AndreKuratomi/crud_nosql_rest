@@ -1,66 +1,282 @@
-CRUD NoSQL Rest!
+## CRUD_NoSQL_rest
 
-Você irá desenvolver uma API REST que realiza operações CRUD para publicações de um blog. No final sua API deve ser capaz de:
+- [Descrição](#descrição)
+- [Instalação](#instalação)
+- [Utilização](#utilização)
+- [Termos de uso](#termos-de-uso)
 
-Registrar uma nova publicação;
+<br>
 
-Ler uma publicação específica ou todas de uma só vez;
+# Descrição
 
-Atualizar uma publicação;
+<p><b>CRUD_NoSQL_rest</b> consiste numa aplicação que realiza operações CRUD para publicações de um blog.</p>
+<p>Esta aplicação utiliza a linguagem Python, o microframework Flask e a biblioteca Pymongo e está organizada em arquitetura MVC utilizando o padrão de projeto Factory.</p>
 
-Deletar uma publicação.
+<br>
 
-(Caso trave em alguma etapa do projeto, mude para algo que tenha mais clareza de como fazer, para retomar a produtividade e recuperar a confiança, acontece com todos.)
+# Instalação
 
-Requisitos:
+<h5>0. Primeiramente, é necessário já ter instalado na própria máquina:</h5>
 
-Aplicação organizada em arquitetura MVC;
+- <p> Um <b>editor de código</b>, conhecido também como <b>IDE</b>. Por exemplo, o <b>[Visual Studio Code (VSCode)](https://code.visualstudio.com/)</b>.</p>
 
-Utilizar o padrão de projeto Factory;
+- <p> Uma <b>ferramenta cliente de API REST</b>. Por exemplo, o <b>[Insomnia](https://insomnia.rest/download)</b> ou o <b>[Postman](https://www.postman.com/product/rest-client/)</b>.</p>
 
-CLASSE!
+- <p> E versionar o diretório para receber o clone da aplicação:</p>
 
-Uma model (classe) chamada Post que armazena as seguintes informações:
+```
+git init
+```
 
-Um id único para cada post, que inicia em 1 e incrementa automaticamente após a inserção de um novo post;
+<br>
+<h5>1. Fazer o clone do reposítório <span style="text-decoration: underline">CRUD_NoSQL_rest</span> na sua máquina pelo terminal do computador ou pelo do IDE:</h5>
 
-created_at (um objeto de data que representa o momento da criação do post). Consultar a documentação do pymongo para verificar como salvar uma data;
+```
+git clone git@gitlab.com:ABKURA/crud-nosql-rest.git
+```
 
-updated_at (um objeto de data que representa o momento da última atualização do post);
+<p>Entrar na pasta criada:</p>
 
-title (titulo do post);
+```
+cd crud-nosql-rest
+```
 
-author (nome do autor do post);
+<h5>1. O arquivo oculto <b>.env<b> com o comando:</h5>
 
-tags (lista de strings que representam tags do post). As tags podem ser qualquer string;
+```
+touch .env
+```
 
-content (texto da publicação).
+dentro do arquivo .env configurar os seguintes comandos:
 
-ROTAS!
+```
+FLASK_ENV=development
 
-Rota para criar um novo post, passando as informações necessárias;
+```
 
-Rota para obter todos os posts;
+<b>Obs:</b> as informações contidas no arquivo <b>.env</b> não devem ser compartilhadas. O arquivo já consta no <b>.gitignore</b> para não ser subido no repositório.
 
-Rota para obter um post específico pelo id (passado via url conforme o padrão rest);
 
-Rota para alterar um post;
+<h5>2. O ambiente virtual e atualizar suas dependências com o seguinte comando:</h5>
 
-Rota para deletar um post;
+```
+python -m venv venv --upgrade-deps
+```
 
-Seguir o máximo possível as restrições do padrão REST;
+ative o seu ambiente virtual com o comando:
 
-ERROS!
+```
+source/venv/bin/activate
+```
 
-Tratar os seguintes erros:
-Dados para criação do post inválidos. (Dados faltando, chaves erradas, etc.);
-Dados para alteração do post inválidos. (Chaves erradas, etc.);
-Post que não existe tentando ser obtido, excluído ou editado.
+<h5>3. recursivamente as dependências do projeto com o comando:</h5>
 
-Regras e observações:
+```
+pip install -r requirements.txt
+```
 
-O nome do db deve ser kenzie e o nome da collection posts;
 
-Analise e implemente a classe usando os métodos com os decorators que mais fizerem sentido. (métodos estáticos, de instância e de classe). Utilize também os métodos especiais quando necessário;
+# Utilização
 
-Manter as boas práticas no repositório (requirements.txt, gitignore, .env de exemplo, readme).
+<p>Antes de passarmos para o API Client precisamos rodar o CLI</p>
+
+```
+flask run
+```
+
+<p>A aplicação rodará com o <b>http://127.0.0.1:5000/</b>. Adicionar depois deste as rotas e suas terminações, ou <b>endpoints</b>, que veremos a seguir.</p>
+
+<p>Após o CLI rodar de modo bem sucedido com o API Client aberto vamos utilizar as seguintes rotas:</p>
+
+<h3>Rotas</h3>
+
+<h4>Cadastro</h4>
+
+Cadastro de usuários (Método POST): <b>/post</b> (ou http://127.0.0.1:5000/post)
+
+Exemplo a ser colocado no body da requisição:
+
+```
+{
+	"title": "Something",
+	"author": "Something's author",
+	"content": "Something's content",
+	"tags": "Something's tag"
+}
+```
+
+E a resposta esperada:
+
+```
+Status: 201 CREATED
+```
+
+```
+{
+  "author": "Something's author",
+  "content": "Something's content",
+  "created_at": "12/03/2022 03:04:38 AM",
+  "id": 1,
+  "tags": "Something's tag",
+  "title": "Something"
+}
+```
+
+Caso falte algum item no body da requisição:
+
+```
+{
+	"title": "Something",
+	"author": "Something's author",
+	"content": "Something's content"
+}
+```
+
+A resposta esperada deverá ser:
+
+```
+Status: 400 BAD REQUEST
+```
+
+```
+{
+    "message": "JSON incompleto! Verifique se sua requisição está completa e se suas keys escritas corretamente."
+}
+```
+
+<h4>Listagem de usuários</h4>
+
+Listagem dos usuários cadastrados (Método GET): <b>/post</b> (ou http://127.0.0.1:5000/post)
+
+Exemplo a ser colocado no body da requisição:
+
+```
+(Requisição feita sem body)
+```
+
+E a resposta esperada:
+
+```
+Status: 200 OK
+```
+
+```
+[
+  {
+    "author": "Something's author",
+    "content": "Something's content",
+    "created_at": "12/03/2022 03:04:38 AM",
+    "id": 1,
+    "tags": "Something's tag",
+    "title": "Something"
+  }
+]
+```
+  
+<h4>Listagem de usuário por id</h4>
+
+Listagem dos usuários cadastrados (Método GET): <b>/post/id**</b> (ou http://127.0.0.1:5000/post/id**)
+
+\*\*preencher com o id do usuário anteriormente cadastrado.
+
+Exemplo a ser colocado no body da requisição:
+
+```
+(Requisição feita sem body)
+```
+
+E a resposta esperada:
+
+```
+Status: 200 OK
+```
+
+```
+{
+  "author": "Something's author",
+  "content": "Something's content",
+  "created_at": "12/03/2022 03:04:38 AM",
+  "id": 1,
+  "tags": "Something's tag",
+  "title": "Something"
+}
+```
+
+  Caso o <b>id</b> no query não exista no banco de dados a resposta esperada deverá ser:
+
+```
+Status: 404 NOT FOUND
+```
+
+```
+{
+    "message": "Não encontrado ou inexistente!"
+}
+```
+
+<h4>Atualização de usuário por id:</h4>
+
+Atualização de dados do usuário cadastrado (Método PATCH): <b>/users/id**</b> (ou http://127.0.0.1:5000/users/id**)
+
+\*\*preencher com o id do usuário anteriormente cadastrado.
+
+Exemplo a ser colocado no body da requisição:
+
+```
+{
+	"title": "Somesomething"
+}
+```
+
+E a resposta esperada:
+
+```
+Status: 201 CREATED
+```
+
+```
+{
+  "author": "Something's author",
+  "content": "Something's content",
+  "created_at": "12/03/2022 03:04:38 AM",
+  "id": 1,
+  "tags": "Something's tag",
+  "title": "Somesomething",
+  "updated_at": "12/03/2022 03:17:08 AM"
+}
+```
+
+<h4>Deleção de usuário por id:</h4>
+
+Deleção de dados do usuário cadastrado (Método DELETE): <b>/users/id**</b> (ou http://127.0.0.1:5000/users/id**)
+
+\*\*preencher com o id do usuário anteriormente cadastrado.
+
+Exemplo a ser colocado no body da requisição:
+
+```
+(Requisição feita sem body)
+```
+
+E a resposta esperada:
+
+```
+Status: 200 OK
+```
+
+```
+[
+  {
+    "author": "Something's author",
+    "content": "Something's content",
+    "created_at": "12/03/2022 03:04:38 AM",
+    "id": 1,
+    "tags": "Something's tag",
+    "title": "Somesomething"
+  }
+]
+```
+  
+# Termos de uso
+
+<p>Esta aplicação atende a fins exclusivamente didáticos e não possui qualquer intuito comercial.</p>
