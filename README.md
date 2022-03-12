@@ -41,7 +41,7 @@ git clone git@gitlab.com:ABKURA/crud-nosql-rest.git
 cd crud-nosql-rest
 ```
 
-<h5>1. O arquivo oculto <b>.env<b> com o comando:</h5>
+<h5>1. O arquivo oculto <b>.env</b> com o comando:</h5>
 
 ```
 touch .env
