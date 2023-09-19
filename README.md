@@ -32,7 +32,7 @@ git init
 <h5>1. Fazer o clone do reposítório <span style="text-decoration: underline">CRUD_NoSQL_rest</span> na sua máquina pelo terminal do computador ou pelo do IDE:</h5>
 
 ```
-git clone git@gitlab.com:ABKURA/crud-nosql-rest.git
+git clone https://github.com/AndreKuratomi/crud_nosql_rest.git
 ```
 
 <p>Entrar na pasta criada:</p>
