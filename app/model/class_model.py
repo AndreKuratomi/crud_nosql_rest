@@ -1,12 +1,9 @@
-import os
 import pymongo
+
 from flask import jsonify
 from datetime import datetime
 from exceptions.exceptions import IncompleteSendError, NotFoundError
-from ipdb import set_trace
-
-mongo_uri = os.getenv("MONGO_URI")
-client_db = os.getenv("MONGO_CLIENT")
+from utils.envs import client_db, mongo_uri
 
 client = pymongo.MongoClient(mongo_uri)
 db = client[client_db]
