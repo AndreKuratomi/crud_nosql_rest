@@ -1,282 +1,231 @@
-## crud_nosql_rest
+# crud_nosql_rest
 
-- [Descrição](#descrição)
-- [Instalação](#instalação)
-- [Utilização](#utilização)
-- [Termos de uso](#termos-de-uso)
-
-<br>
-
-# Descrição
-
-<p><b>crud_nosql_rest</b> consiste numa aplicação que realiza operações CRUD para publicações de um blog.</p>
-<p>Esta aplicação utiliza a linguagem <b>Python</b>, o microframework <b>Flask</b> e a biblioteca <b>Pymongo</b> e está organizada em arquitetura MVC utilizando o padrão de projeto Factory.</p>
+- [Translations](#translations)
+- [About](#about)
+- [Instalation](#instalation)
+- [Documentation](#documentation)
+- [References](#references)
 
 <br>
 
-# Instalação
+## Translations
 
-<h5>0. Primeiramente, é necessário já ter instalado na própria máquina:</h5>
+- [Português brasileiro](./.multilingual_readmes/README_pt-br.md)
+- [English / Inglês](https://github.com/AndreKuratomi/crud_nosql_rest/)
 
-- Um <b>editor de código</b>, conhecido também como <b>IDE</b>. Por exemplo, o <b>[Visual Studio Code (VSCode)](https://code.visualstudio.com/)</b>.
+<br>
 
-- Uma <b>ferramenta cliente de API REST</b>. Por exemplo, o <b>[Insomnia](https://insomnia.rest/download)</b> ou o <b>[Postman](https://www.postman.com/product/rest-client/)</b>.
+## About
 
-- <p> E versionar o diretório para receber o clone da aplicação:</p>
+<b>crud_nosql_rest</b> is the <b>PrototipoLogin</b>'s API.
+
+This API uses the language <strong>[Python](https://www.python.org/downloads/)</strong>, its framework <strong>[Flask](https://flask.palletsprojects.com/en/3.0.x/)</strong>, its lib <strong>[PyMongo](https://pypi.org/project/pymongo/)</strong>, the database <strong>[MongoDB](https://www.mongodb.com/)</strong>, and the software <strong>[Docker](https://docs.docker.com/)</strong> for running both Python and MongoDB.
+
+<br>
+
+## Instalation
+
+<h3>0. It is first necessary to have instaled the following devices:</h3>
+
+- The code versioning <b>[Git](https://git-scm.com/downloads)</b>,
+
+- The software <b>[Docker](https://docs.docker.com/)</b>,
+
+- A <b>code editor</b>, also known as <b>IDE</b>. For instance, <strong>[Visual Studio Code (VSCode)](https://code.visualstudio.com/)</strong>,
+
+- <p> And versioning your directory to receive the aplication clone:</p>
 
 ```
 git init
 ```
 
+Obs: both <b>Python</b> and <b>MongoDb</b> are not required for this app since they are already provided by <b>Docker</b>.
+
 <br>
-<h5>1. Fazer o clone do reposítório <span style="text-decoration: underline">CRUD_NoSQL_rest</span> na sua máquina pelo terminal do computador ou pelo do IDE:</h5>
+<h3>1. Clone the repository <b>crud_nosql_rest</b> by your machine terminal or by the IDE:</h3>
 
 ```
 git clone https://github.com/AndreKuratomi/crud_nosql_rest.git
 ```
 
-<p>Entrar na pasta criada:</p>
+WINDOWS:
+
+Obs: In case of any mistake similar to this one: 
+
+```
+unable to access 'https://github.com/AndreKuratomi/crud_nosql_rest.git': SSL certificate problem: self-signed certificate in certificate chain
+```
+
+Configure git to disable SSL certification:
+
+```
+git config --global http.sslVerify "false"
+```
+
+<p>Enter the directory:</p>
 
 ```
 cd crud_nosql_rest
 ```
+<br>
 
-<h5>1. O arquivo oculto <b>.env</b> com o comando:</h5>
+<h3>2. After cloning the repository install:</h3>
+
+<h4>Virtual enviroment* and update its dependencies with the following command:</h4>
+
+
+LINUX:
+```
+python3 -m venv venv --upgrade-deps
+```
+
+WINDOWS:
+```
+py -m venv venv --upgrade-deps
+```
+
+In case an error like this one is returned just follow the command displayed:
+
+```
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.10-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+```
+
+*It is a good practice to work with virtual enviroments because different projects may need different dependencies. A virtual enviroment is only a separated enviroment from the user machine. If not used, the user's machine may have lots of dependencies intalled that may only be used in a single project.
+
+<br>
+
+<h4>Ativate your virtual enviroment with the command:</h4>
+
+LINUX:
+```
+source/venv/bin/activate
+```
+
+WINDOWS:
+
+On Windows operational system it is necessary to configure the Execution Policy at PowerShell:
+
+```
+Get-ExecutionPolicy # to check the Execution policy type
+Set-ExecutionPolicy RemoteSigned # to change the type of policy if the command above shows 'Restricted'
+```
+Obs: It may often be necessary to open PowerShell as administrador for that.
+
+```
+.\env\Scripts\activate
+```
+
+<br>
+
+<h4>Install its dependencies:</h4>
+
+```
+pip install -r requirements.txt
+```
+<br>
+
+WINDOWS:
+
+In case any error similar to the one bellow be returned:
+
+```
+ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: 'C:\\Users\\andre.kuratomi\\OneDrive - Company\\Área de Trabalho\\tables_to_db_mail_for_finances\\tables_to_db_and_mail_finances\\env\\Lib\\site-packages\\jedi\\third_party\\django-stubs\\django-stubs\\contrib\\contenttypes\\management\\commands\\remove_stale_contenttypes.pyi'
+HINT: This error might have occurred since this system does not have Windows Long Path support enabled. You can find information on how to enable this at https://pip.pypa.io/warnings/enable-long-paths
+```
+
+Run cmd as adminstrador with the following command:
+
+```
+reg.exe add HKLM\SYSTEM\CurrentControlSet\Control\FileSystem /v LongPathsEnabled /t REG_DWORD /d 1 /f
+```
+
+<br>
+
+<h3>3. Open the application on your IDE:</h3>
+
+```
+code .
+```
+<br>
+
+
+<h3>4. Create <b>.env</b> file at the root directory:</h3>
 
 ```
 touch .env
 ```
 
-dentro do arquivo .env configurar os seguintes comandos:
+Inside it we need to put our enviroment variables taking as reference the given file <b>.env.example</b>:
 
 ```
-FLASK_ENV=development
-
+FLASK_ENV=flask_env
+MONGO_CLIENT=some_client
+MONGO_URI=mongo_uri
 ```
 
-<b>Obs:</b> as informações contidas no arquivo <b>.env</b> não devem ser compartilhadas. O arquivo já consta no <b>.gitignore</b> para não ser subido no repositório.
+<b>Obs:</b> Do not share info from <b>.env</b> file. It is already mentioned in <b>.gitignore</b> for not being pushed to the repo.
 
+<h3>5. And run Flask:</h3>
 
-<h5>2. O ambiente virtual e atualizar suas dependências com o seguinte comando:</h5>
-
-```
-python -m venv venv --upgrade-deps
-```
-
-ative o seu ambiente virtual com o comando:
-
-```
-source/venv/bin/activate
-```
-
-<h5>3. Instalar recursivamente as dependências do projeto com o comando:</h5>
-
-```
-pip install -r requirements.txt
-```
-
-
-# Utilização
-
-<p>Antes de passarmos para o API Client precisamos rodar o CLI</p>
-
+LINUX and WINDOWS:
 ```
 flask run
 ```
 
-<p>A aplicação rodará com o <b>http://127.0.0.1:5000/</b>. Adicionar depois deste as rotas e suas terminações, ou <b>endpoints</b>, que veremos a seguir.</p>
+<br>
 
-<p>Após o CLI rodar de modo bem sucedido com o API Client aberto vamos utilizar as seguintes rotas:</p>
+<h3>6. Run dockerfile*:</h3>
 
-<h3>Rotas</h3>
-
-<h4>Cadastro</h4>
-
-Cadastro de usuários (Método POST): <b>/post</b> (ou http://127.0.0.1:5000/post)
-
-Exemplo a ser colocado no body da requisição:
-
+LINUX and WINDOWS:
 ```
-{
-	"title": "Something",
-	"author": "Something's author",
-	"content": "Something's content",
-	"tags": "Something's tag"
-}
+docker compose build
 ```
 
-E a resposta esperada:
+<br>
 
-```
-Status: 201 CREATED
-```
+<h3>7. Run docker compose*:</h3>
 
+LINUX and WINDOWS:
 ```
-{
-  "author": "Something's author",
-  "content": "Something's content",
-  "created_at": "12/03/2022 03:04:38 AM",
-  "id": 1,
-  "tags": "Something's tag",
-  "title": "Something"
-}
+docker compose up
 ```
 
-Caso falte algum item no body da requisição:
+<br>
+
+*It may be required to set docker with the user with the following command:
 
 ```
-{
-	"title": "Something",
-	"author": "Something's author",
-	"content": "Something's content"
-}
+sudo usermod -aG docker $USER
 ```
 
-A resposta esperada deverá ser:
+This $USER can be obtained by the following command (Linux):
 
 ```
-Status: 400 BAD REQUEST
+whoami
 ```
 
-```
-{
-    "message": "JSON incompleto! Verifique se sua requisição está completa e se suas keys escritas corretamente."
-}
-```
+<br>
 
-<h4>Listagem de usuários</h4>
+## Documentation
 
-Listagem dos usuários cadastrados (Método GET): <b>/post</b> (ou http://127.0.0.1:5000/post)
+For full description of endpoints and its responses check the insomnia documentation on the link bellow (necessary free login account) click [here](https://insomnia-documentation-mauve.vercel.app/).
 
-Exemplo a ser colocado no body da requisição:
+<br>
 
-```
-(Requisição feita sem body)
-```
+## References
 
-E a resposta esperada:
-
-```
-Status: 200 OK
-```
-
-```
-[
-  {
-    "author": "Something's author",
-    "content": "Something's content",
-    "created_at": "12/03/2022 03:04:38 AM",
-    "id": 1,
-    "tags": "Something's tag",
-    "title": "Something"
-  }
-]
-```
-  
-<h4>Listagem de usuário por id</h4>
-
-Listagem dos usuários cadastrados (Método GET): <b>/post/id**</b> (ou http://127.0.0.1:5000/post/id**)
-
-\*\*preencher com o id do usuário anteriormente cadastrado.
-
-Exemplo a ser colocado no body da requisição:
-
-```
-(Requisição feita sem body)
-```
-
-E a resposta esperada:
-
-```
-Status: 200 OK
-```
-
-```
-{
-  "author": "Something's author",
-  "content": "Something's content",
-  "created_at": "12/03/2022 03:04:38 AM",
-  "id": 1,
-  "tags": "Something's tag",
-  "title": "Something"
-}
-```
-
-  Caso o <b>id</b> no query não exista no banco de dados a resposta esperada deverá ser:
-
-```
-Status: 404 NOT FOUND
-```
-
-```
-{
-    "message": "Não encontrado ou inexistente!"
-}
-```
-
-<h4>Atualização de usuário por id:</h4>
-
-Atualização de dados do usuário cadastrado (Método PATCH): <b>/users/id**</b> (ou http://127.0.0.1:5000/users/id**)
-
-\*\*preencher com o id do usuário anteriormente cadastrado.
-
-Exemplo a ser colocado no body da requisição:
-
-```
-{
-	"title": "Somesomething"
-}
-```
-
-E a resposta esperada:
-
-```
-Status: 201 CREATED
-```
-
-```
-{
-  "author": "Something's author",
-  "content": "Something's content",
-  "created_at": "12/03/2022 03:04:38 AM",
-  "id": 1,
-  "tags": "Something's tag",
-  "title": "Somesomething",
-  "updated_at": "12/03/2022 03:17:08 AM"
-}
-```
-
-<h4>Deleção de usuário por id:</h4>
-
-Deleção de dados do usuário cadastrado (Método DELETE): <b>/users/id**</b> (ou http://127.0.0.1:5000/users/id**)
-
-\*\*preencher com o id do usuário anteriormente cadastrado.
-
-Exemplo a ser colocado no body da requisição:
-
-```
-(Requisição feita sem body)
-```
-
-E a resposta esperada:
-
-```
-Status: 200 OK
-```
-
-```
-[
-  {
-    "author": "Something's author",
-    "content": "Something's content",
-    "created_at": "12/03/2022 03:04:38 AM",
-    "id": 1,
-    "tags": "Something's tag",
-    "title": "Somesomething"
-  }
-]
-```
-  
-# Termos de uso
-
-<p>Esta aplicação atende a fins exclusivamente didáticos e não possui qualquer intuito comercial.</p>
+- [Docker](https://docs.docker.com/)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+- [Insomnia-documenter](https://www.npmjs.com/package/insomnia-documenter)
+- [Insomnia-documenter (quick tutorial)](https://www.youtube.com/watch?v=pq2u3FqVVy8)
+- [MongoDB](https://www.mongodb.com/)
+- [Python](https://www.python.org/downloads/)
+- [PyMongo](https://pypi.org/project/pymongo/)
