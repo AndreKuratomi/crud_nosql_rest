@@ -1,12 +1,15 @@
+import os
 import pymongo
 from flask import jsonify
 from datetime import datetime
 from exceptions.exceptions import IncompleteSendError, NotFoundError
 from ipdb import set_trace
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+mongo_uri = os.getenv("MONGO_URI")
+client_db = os.getenv("MONGO_CLIENT")
 
-db = client["kenzie"]
+client = pymongo.MongoClient(mongo_uri)
+db = client[client_db]
 
 
 class Post:

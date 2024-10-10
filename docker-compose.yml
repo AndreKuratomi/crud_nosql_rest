@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  # linux?
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  web: #alphabetical order?
+    build: .
+    restart: always
+    ports:
+      - "5005:5000" # host:docker
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
