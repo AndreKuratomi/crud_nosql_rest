@@ -68,4 +68,4 @@ def deco_update(id):
 
 def deco_delete(id):
     to_delete = Post.delete(id)
-    return to_delete
+    return "", 204
