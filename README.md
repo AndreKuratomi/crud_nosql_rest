@@ -17,7 +17,7 @@
 
 ## About
 
-<b>crud_nosql_rest</b> is the <b>PrototipoLogin</b>'s API.
+<b>crud_nosql_rest</b> is a simple API for blog posts with NoSQL databasen and CRUD operations.
 
 This API uses the language <strong>[Python](https://www.python.org/downloads/)</strong>, its framework <strong>[Flask](https://flask.palletsprojects.com/en/3.0.x/)</strong>, its lib <strong>[PyMongo](https://pypi.org/project/pymongo/)</strong>, the database <strong>[MongoDB](https://www.mongodb.com/)</strong>, and the software <strong>[Docker](https://docs.docker.com/)</strong> for running both Python and MongoDB.
 
