@@ -215,7 +215,7 @@ whoami
 
 ## Documentation
 
-For full description of endpoints and its responses check the insomnia documentation on the link bellow (necessary free login account) click [here](https://insomnia-documentation-mauve.vercel.app/).
+For full description of endpoints and its responses check the insomnia documentation on the link bellow (necessary free login account) click [here](https://insomnia-odwtdahxh-abkuras-projects.vercel.app/).
 
 <br>
 
