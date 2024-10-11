@@ -18,9 +18,9 @@
 
 ## Sobre
 
-<b>crud_nosql_rest</b> consiste numa aplicação que realiza operações CRUD para publicações de um blog.
+<b>crud_nosql_rest</b> consiste numa aplicação que simula operações CRUD para publicações de um blog.
 
-Esta aplicação utiliza a linguagem <strong>[Python](https://www.python.org/downloads/)</strong>, seu microframework <strong>[Flask](https://flask.palletsprojects.com/en/3.0.x/)</strong>, a biblioteca <strong>[PyMongo](https://pypi.org/project/pymongo/)</strong>, o banco de dados NoSQL<strong>[MongoDB](https://www.mongodb.com/)</strong>, e o software <strong>[Docker](https://docs.docker.com/)</strong> para fornecer tanto Python quanto MongoDB.
+Esta aplicação utiliza a linguagem <strong>[Python](https://www.python.org/downloads/)</strong>, seu microframework <strong>[Flask](https://flask.palletsprojects.com/en/3.0.x/)</strong>, a biblioteca <strong>[PyMongo](https://pypi.org/project/pymongo/)</strong>, o banco de dados NoSQL<strong>[MongoDB](https://www.mongodb.com/)</strong>, e o software <strong>[Docker](https://docs.docker.com/)</strong> para fornecer tanto <b>Python</b> quanto <b>MongoDB</b>.
 
 <br>
 
