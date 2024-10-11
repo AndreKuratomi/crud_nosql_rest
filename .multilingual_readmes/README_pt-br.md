@@ -11,7 +11,7 @@
 
 ## Traduções
 
-- [English / Inglês](https://github.com/AndreKuratomi/crud_nosql_rest/)
+- [English / Inglês](https://github.com/AndreKuratomi/crud_nosql_rest)
 - [Português brasileiro](./README_pt-br.md)
 
 <br>
