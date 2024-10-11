@@ -42,7 +42,7 @@ Esta aplicação utiliza a linguagem <strong>[Python](https://www.python.org/dow
 git init
 ```
 
-<b>Obs:</b> Tanto <b>Python</b> quanto <b>MongoDb</b> não são exigidos para esta aplicação porque eles já são fornecido pelo <b>Docker</b>.
+<b>Obs:</b> Tanto <b>Python</b> quanto <b>MongoDb</b> não são exigidos para esta aplicação porque eles já são fornecidos pelo <b>Docker</b>.
 
 <br>
 
