@@ -10,8 +10,8 @@
 
 ## Translations
 
-- [Português brasileiro](./.multilingual_readmes/README_pt-br.md)
-- [English / Inglês](https://github.com/AndreKuratomi/crud_nosql_rest)
+- [🇧🇷 / 🇵🇹 Português](./.multilingual_readmes/README_pt-br.md)
+- [🇬🇧 / 🇺🇸 English / Inglês](https://github.com/AndreKuratomi/crud_nosql_rest)
 
 <br>
 
